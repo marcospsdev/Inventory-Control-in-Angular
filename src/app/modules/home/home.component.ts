@@ -5,6 +5,7 @@ import { SignupUserRequest } from '../../models/interfaces/user/SignupUserReques
 import { AuthRequest } from '../../models/interfaces/user/auth/AuthRequest';
 import { CookieService } from 'ngx-cookie-service';
 import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -30,6 +31,7 @@ export class HomeComponent {
     private userService: UserService,
     private cookieService: CookieService,
     private messageService: MessageService,
+    private router: Router,
   ) {}
 
   onSubmitLoginForm(): void {
@@ -40,6 +42,7 @@ export class HomeComponent {
             console.log(response);
             this.cookieService.set('USER_INFO', response?.token);
             this.loginForm.reset();
+            this.router.navigate(['/dashboard']);
 
             this.messageService.add({
               severity: 'success',
