@@ -21,9 +21,11 @@ import { ConfirmationService } from 'primeng/api';
 import { SharedModule } from '../../shared/shared.module';
 import { ProductsHomeComponent } from './page/products-home/products-home.component';
 import { PRODUCTS_ROUTES } from './products.routing';
+import { ProductsTableComponent } from './components/products-table/products-table.component';
+import {RippleModule} from "primeng/ripple";
 
 @NgModule({
-  declarations: [ProductsHomeComponent],
+  declarations: [ProductsHomeComponent, ProductsTableComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -44,6 +46,7 @@ import { PRODUCTS_ROUTES } from './products.routing';
     DropdownModule,
     ConfirmDialogModule,
     TooltipModule,
+    RippleModule,
   ],
   providers: [DialogService, ConfirmationService],
 })
