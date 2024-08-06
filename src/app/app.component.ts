@@ -13,5 +13,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.primeNgConfig.ripple = true; //Definição referente as animações, botões...
+    this.primeNgConfig.setTranslation({
+      apply: 'Aplicar',
+      clear: 'Limpar',
+    });
   }
 }

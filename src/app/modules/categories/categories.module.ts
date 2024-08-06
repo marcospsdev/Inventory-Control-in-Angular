@@ -21,9 +21,12 @@ import { ConfirmationService } from 'primeng/api';
 import { CategoriesHomeComponent } from './page/categories-home/categories-home.component';
 import { CATEGORIES_ROUTES } from './categories.routing';
 import { SharedModule } from '../../shared/shared.module';
+import { CategoriesTableComponent } from './components/categories-table/categories-table.component';
+import { RippleModule } from 'primeng/ripple';
+import { CategoryFormComponent } from './components/category-form/category-form.component';
 
 @NgModule({
-  declarations: [CategoriesHomeComponent],
+  declarations: [CategoriesHomeComponent, CategoriesTableComponent, CategoryFormComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -44,6 +47,7 @@ import { SharedModule } from '../../shared/shared.module';
     DropdownModule,
     ConfirmDialogModule,
     TooltipModule,
+    RippleModule,
   ],
   providers: [DialogService, ConfirmationService],
 })

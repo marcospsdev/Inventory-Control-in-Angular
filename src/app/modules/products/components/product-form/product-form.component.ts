@@ -13,6 +13,7 @@ import { GetAllProductsResponse } from '../../../../models/interfaces/products/r
 import { ProductsDataTransferService } from '../../../../shared/services/products/products-data-transfer.service';
 import { ProductEvent } from '../../../../models/enums/products/ProductEvent';
 import { EditProductRequest } from '../../../../models/interfaces/products/request/EditProductRequest';
+import { SaleProductRequest } from '../../../../models/interfaces/products/request/SaleProductRequest';
 
 @Component({
   selector: 'app-product-form',
@@ -171,6 +172,44 @@ export class ProductFormComponent implements OnInit, OnDestroy {
               life: 2500,
             });
             this.editProductForm.reset();
+          },
+        });
+    }
+  }
+
+  handleSubmitSaleProduct(): void {
+    if (this.saleProductForm?.value && this.saleProductForm?.valid) {
+      const requestDatas: SaleProductRequest = {
+        amount: this.saleProductForm.value?.amount as number,
+        product_id: this.saleProductForm.value?.product_id as string,
+      };
+
+      this.productsService
+        .saleProduct(requestDatas)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: (response) => {
+            if (response) {
+              this.messageService.add({
+                severity: 'success',
+                summary: 'Sucesso',
+                detail: 'Venda efetuada com sucesso!',
+                life: 3000,
+              });
+              this.saleProductForm.reset();
+              this.getProductDatas();
+              this.router.navigate(['/dashboard']);
+            }
+          },
+          error: (err) => {
+            console.log(err);
+            this.saleProductForm.reset();
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Erro',
+              detail: 'Erro ao vender produto!',
+              life: 3000,
+            });
           },
         });
     }
